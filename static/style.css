@@ -1,0 +1,139 @@
+:root {
+  --bg-light: #f4f6fc;
+  --bg-dark: #0d1b2a;
+  --text-light: #1e2a3a;
+  --text-dark: hsl(218, 71%, 48%);
+  --bubble-user: hsl(218, 71%, 48%);
+  --bubble-bot: #d0e7ff;
+  --border-radius: 16px;
+}
+
+[data-theme="light"] {
+  --bg: var(--bg-light);
+  --text: var(--text-light);
+  --bubble-bg-user: var(--bubble-user);
+  --bubble-bg-bot: var(--bubble-bot);
+}
+
+[data-theme="dark"] {
+  --bg: var(--bg-dark);
+  --text: var(--text-dark);
+  --bubble-bg-user: var(--bubble-user);
+  --bubble-bg-bot: #29465b;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.chat-container {
+  width: 100%;
+  max-width: 480px;
+  background: var(--bg);
+  border-radius: 20px;
+  box-shadow: 0 4px 30px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  height: 90vh;
+  overflow: hidden;
+}
+
+header {
+  background-color: #e6f0ff;
+  padding: 1rem 1.25rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  font-size: 1.1rem;
+  border-bottom: 1px solid #d9e4f5;
+}
+
+header button {
+  background: transparent;
+  border: none;
+  font-size: 1.25rem;
+  cursor: pointer;
+}
+
+main {
+  flex: 1;
+  padding: 1rem;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+
+form {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  border-top: 1px solid #dcdcdc;
+  background: #fff;
+}
+
+form input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  font-size: 1rem;
+}
+
+form button {
+  padding: 0.75rem 1.25rem;
+  background: #2363d1;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-weight: 500;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+form button:hover {
+  background: #1e54b2;
+}
+
+.message {
+  margin: 0.75rem 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.message.user {
+  align-items: flex-end;
+}
+
+.message.bot {
+  align-items: flex-start;
+}
+
+.bubble {
+  max-width: 80%;
+  padding: 0.75rem 1rem;
+  border-radius: var(--border-radius);
+  background-color: var(--bubble-bg-bot);
+  line-height: 1.4;
+  font-size: 0.95rem;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.message.user .bubble {
+  background-color: var(--bubble-bg-user);
+  color: white;
+}
+
+.timestamp {
+  font-size: 0.7rem;
+  margin-top: 0.3rem;
+  color: gray;
+  align-self: flex-end;
+}

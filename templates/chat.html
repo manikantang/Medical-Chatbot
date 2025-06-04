@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ChatBot</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      html.dataset.theme = html.dataset.theme === "dark" ? "light" : "dark";
+    }
+  </script>
+</head>
+<body>
+  <div class="chat-container">
+    <header>
+      <h1>ChatBot 🩺</h1>
+      <button onclick="toggleTheme()">🌓</button>
+    </header>
+
+    <main id="chat-box">
+      <!-- Chat messages appear here -->
+    </main>
+
+    <form id="chat-form">
+      <input type="text" id="user-input" placeholder="Ask your medical question..." required autocomplete="off" />
+      <button type="submit">Send</button>
+    </form>
+  </div>
+
+  <script>
+    const form = document.getElementById('chat-form');
+    const chatBox = document.getElementById('chat-box');
+
+    function appendMessage(sender, text) {
+      const message = document.createElement('div');
+      message.className = `message ${sender}`;
+      const time = new Date().toLocaleTimeString();
+      message.innerHTML = `<div class="bubble">${text}</div><div class="timestamp">${time}</div>`;
+      chatBox.appendChild(message);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const input = document.getElementById('user-input');
+      const msg = input.value.trim();
+      if (!msg) return;
+      appendMessage('user', msg);
+      input.value = '';
+
+      const response = await fetch('/ask', {
+        method: 'POST',
+        body: new URLSearchParams({ msg })
+      });
+
+      const answer = await response.text();
+      appendMessage('bot', answer);
+    });
+  </script>
+</body>
+</html>
