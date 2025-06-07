@@ -10,4 +10,5 @@ langchain_openai
 langchain_experimental
 together
 requests
+gunicorn
 -e .
