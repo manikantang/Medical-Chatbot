@@ -60,6 +60,13 @@ def chat():
     print("Response: ",response["answer"])
     return str(response["answer"])
 
+@app.route('/chat', methods=['POST'])
+def chat_post():
+    user_query = request.form['query']
+    ai_response = generate_ai_response(user_query)  # your AI logic
+    log_interaction(user_query, ai_response)
+    return render_template("chat.html", response=ai_response)
+
 
 if __name__ == '__main__':  
     app.run(host='0.0.0', port=8080, debug=True)  # Set debug=True for development
