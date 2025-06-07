@@ -8,7 +8,7 @@ langchain-pinecone
 langchain_community
 langchain_openai
 langchain_experimental
-together
+langchain-together
 requests
 gunicorn
 -e .
