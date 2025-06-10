@@ -1,13 +1,13 @@
 from flask import Flask, render_template, request, redirect, jsonify
 from langchain_community.document_loaders import PyPDFLoader, DirectoryLoader
-from langchain_community.embeddings import HuggingFaceEmbeddings
+from langchain_huggingface import HuggingFaceEmbeddings
 from src.helper import load_pdf_file, text_split, download_huggingface_embeddings
 from langchain_pinecone import PineconeVectorStore
 from langchain_openai import OpenAI
 from langchain.chains import create_retrieval_chain
 from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain_core.prompts import ChatPromptTemplate
-from together import Together
+from langchain_together import Together
 from dotenv import load_dotenv
 from src.prompt import *
 import os
